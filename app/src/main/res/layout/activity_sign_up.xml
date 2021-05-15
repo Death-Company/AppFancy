@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create new acount"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:textColor="#90a4ae"
+        android:layout_marginTop="130dp"/>
+    <EditText
+        android:id="@+id/edtFirstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="First name:"
+        android:textStyle="bold"
+        android:textColor="#90a4ae"
+        android:layout_marginTop="40dp"/>
+    <EditText
+        android:id="@+id/edtLastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Last name:"
+        android:textStyle="bold"
+        android:textColor="#90a4ae"
+        android:layout_marginTop="15dp"/>
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Email:"
+        android:textStyle="bold"
+        android:textColor="#90a4ae"
+        android:layout_marginTop="15dp"/>
+    <EditText
+        android:id="@+id/edtPassCreate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ems="13"
+    android:hint="Password:"
+    android:textStyle="bold"
+    android:textColor="#90a4ae"
+    android:layout_marginTop="15dp"/>
+    <EditText
+        android:id="@+id/edtConfirmPasscreate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ems="13"
+    android:hint="Confirm password:"
+    android:textStyle="bold"
+    android:textColor="#90a4ae"
+    android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/buttonloginsigin"
+        android:text="Create"
+        android:textStyle="bold"
+        app:backgroundTint="#009efd" />
+
+
+
+
+</LinearLayout>

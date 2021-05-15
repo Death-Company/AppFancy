@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="40"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verify Your PhoneNumber"
+        android:textColor="#90a4ae"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="70dp"/>
+
+    <EditText
+        android:layout_weight="1"
+        android:id="@+id/edtPhoneNumberVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="13"
+        android:hint="Phone number"
+        android:inputType="number"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/btnSendOTP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/buttonloginsigin"
+        android:text="Send OTP"
+        app:backgroundTint="#009efd" />
+    <EditText
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/edtOTPcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:inputType="number"
+        android:hint="OTP Code"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:layout_marginTop="40dp" />
+
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:layout_weight="3.5"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnVerify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonloginsigin"
+            android:text="Verify"
+
+            app:backgroundTint="#009efd" />
+
+        <Button
+            android:id="@+id/btnResendOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="57dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonloginsigin"
+            android:text="Resend OTP"
+            app:backgroundTint="#009efd" />
+    </LinearLayout>
+
+
+</LinearLayout>

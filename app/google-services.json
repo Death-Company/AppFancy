@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "66859157880",
+    "project_id": "royalrelease-99f22",
+    "storage_bucket": "royalrelease-99f22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66859157880:android:bc039c598573ee7254e08d",
+        "android_client_info": {
+          "package_name": "com.example.royal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66859157880-6ij8boejcubedt3tdpclk3lc3evoinf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.royal",
+            "certificate_hash": "3f8d3207bde493285bc095e5c1dfe4ab13daa8cf"
+          }
+        },
+        {
+          "client_id": "66859157880-m2t3471ok1tc8jdgqfrkcfrg8d622f06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDisy0uk1fWc_97k2eZSW0Cd8ZDJwS4ZGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66859157880-m2t3471ok1tc8jdgqfrkcfrg8d622f06.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
