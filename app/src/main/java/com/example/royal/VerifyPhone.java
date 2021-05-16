@@ -34,6 +34,12 @@ public class VerifyPhone extends AppCompatActivity {
     String userPhoneNum,verificationId;
     PhoneAuthProvider.ForceResendingToken token;
     FirebaseAuth fAuth;
+
+    public String removeLeadingZeroes(String str) {
+        String strPattern = "^0+(?!$)";
+        str = str.replaceFirst(strPattern, "");
+        return str;
+    }
     PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,7 @@ public class VerifyPhone extends AppCompatActivity {
                     phoneNumber.setError("not null");
                     return;
                 }
-                userPhoneNum = "+84" + phoneNumber.getText().toString().trim();
+                userPhoneNum = "+84" + removeLeadingZeroes(phoneNumber.getText().toString().trim());
                 verifyPhoneNumber(userPhoneNum);
                 Toast.makeText(VerifyPhone.this,userPhoneNum,Toast.LENGTH_SHORT).show();
 
