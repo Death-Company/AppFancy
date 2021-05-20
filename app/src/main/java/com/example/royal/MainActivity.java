@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private Button login,signup;
+    private Button login,signup,btnGotoQr;
     private TextView getlink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,14 @@ public class MainActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.btnLogin);
         signup = (Button) findViewById(R.id.btnRegister);
         getlink = (TextView) findViewById(R.id.txtAbout);
-
+        btnGotoQr = (Button)findViewById(R.id.btnQR);
+        btnGotoQr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, QrCode.class);
+                startActivity(intent);
+            }
+        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
