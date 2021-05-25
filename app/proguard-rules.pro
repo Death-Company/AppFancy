@@ -2,6 +2,8 @@
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
 #
+    # Add this global rule
+
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 

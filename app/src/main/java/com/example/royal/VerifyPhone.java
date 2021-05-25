@@ -11,9 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 //import com.google.firebase.FirebaseApp;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 //import com.google.firebase.appcheck.FirebaseAppCheck;
 //import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory;
@@ -23,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +38,8 @@ public class VerifyPhone extends AppCompatActivity {
     String userPhoneNum,verificationId;
     PhoneAuthProvider.ForceResendingToken token;
     FirebaseAuth fAuth;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     public String removeLeadingZeroes(String str) {
         String strPattern = "^0+(?!$)";
@@ -51,7 +57,7 @@ public class VerifyPhone extends AppCompatActivity {
         resend.setEnabled(false);
         phoneNumber =  findViewById(R.id.edtPhoneNumberVerify);
         fAuth = FirebaseAuth.getInstance();
-       // fAuth = FirebaseAuth.getInstance().getFirebaseAuthSettings().forceRecaptchaFlowForTesting(boolean forceRecaptchaFlow);
+
 
         otpCode = findViewById(R.id.edtOTPcode);
         sendotp.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +74,6 @@ public class VerifyPhone extends AppCompatActivity {
 
             }
         });
-        // Force reCAPTCHA flow
-        //FirebaseAuth.getInstance().getFirebaseAuthSettings().forceRecaptchaFlowForTesting(fAuth);
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,8 +82,10 @@ public class VerifyPhone extends AppCompatActivity {
                     otpCode.setError("Enter OTP Code First");
                     return;
                 }
-                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,otpCode.getText().toString().trim());
-                authenticateUser(credential);
+                else {
+                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otpCode.getText().toString().trim());
+                    authenticateUser(credential);
+                }
             }
         });
        callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -125,11 +131,30 @@ public class VerifyPhone extends AppCompatActivity {
             PhoneAuthProvider.verifyPhoneNumber(options);
     }
     public void authenticateUser(PhoneAuthCredential credential){
+        String first = getIntent().getExtras().getString("first");
+        String last = getIntent().getExtras().getString("last");
+        String email = getIntent().getExtras().getString("email");
+        String pass = getIntent().getExtras().getString("pass");
+        String phone = phoneNumber.getText().toString().trim();
             fAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
+                    User usercreate = new User(first,last,email,pass,phone);
+                    FirebaseDatabase.getInstance().getReference("User")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(usercreate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(VerifyPhone.this,"User has been created !",Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(VerifyPhone.this,"Faild to Register !",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                     Toast.makeText(VerifyPhone.this,"Success",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -138,6 +163,7 @@ public class VerifyPhone extends AppCompatActivity {
                     Toast.makeText(VerifyPhone.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
+
     }
 
 }

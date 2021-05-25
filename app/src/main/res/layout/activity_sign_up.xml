@@ -44,22 +44,24 @@
         android:layout_marginTop="15dp"/>
     <EditText
         android:id="@+id/edtPassCreate"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="13"
-    android:hint="Password:"
-    android:textStyle="bold"
-    android:textColor="#90a4ae"
-    android:layout_marginTop="15dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Password:"
+        android:textStyle="bold"
+        android:textColor="#90a4ae"
+        android:layout_marginTop="15dp"
+        android:inputType="textPassword"/>
     <EditText
         android:id="@+id/edtConfirmPasscreate"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="13"
-    android:hint="Confirm password:"
-    android:textStyle="bold"
-    android:textColor="#90a4ae"
-    android:layout_marginTop="15dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:hint="Confirm password:"
+        android:textStyle="bold"
+        android:textColor="#90a4ae"
+        android:layout_marginTop="15dp"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnCreate"

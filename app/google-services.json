@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "66859157880",
+    "firebase_url": "https://royalrelease-99f22-default-rtdb.firebaseio.com",
     "project_id": "royalrelease-99f22",
     "storage_bucket": "royalrelease-99f22.appspot.com"
   },
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "66859157880-6ij8boejcubedt3tdpclk3lc3evoinf4.apps.googleusercontent.com",
+          "client_id": "66859157880-4d76m1o874rmec02fi6lnv5ie0cd2nf6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.royal",
-            "certificate_hash": "3f8d3207bde493285bc095e5c1dfe4ab13daa8cf"
+            "certificate_hash": "f1be47e8f81e5d95fed0cf54abe18929634a8222"
           }
         },
         {
