@@ -1,0 +1,25 @@
+{
+  "User" : {
+    "0379449724" : {
+      "email" : "death@gmail.com",
+      "first" : "nhat",
+      "last" : "ho",
+      "pass" : "123456",
+      "phone" : "0379449724"
+    },
+    "0962098221" : {
+      "email" : "death@gmail.com",
+      "first" : "duong",
+      "last" : "vo",
+      "pass" : "123454321",
+      "phone" : "0962098221"
+    },
+    "D4BOqvAeNWg5lv2z442ssa5tvnm1" : {
+      "email" : "thang@gmail.com",
+      "first" : "thang",
+      "last" : "bum",
+      "pass" : "1234567",
+      "phone" : "0853349506"
+    }
+  }
+}

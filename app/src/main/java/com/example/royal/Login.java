@@ -22,11 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+
 public class Login extends AppCompatActivity {
     private EditText userLogin,passLogin;
     private Button buttonLogin;
     FirebaseAuth fAuth;
-
+    DatabaseReference post ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,84 +40,80 @@ public class Login extends AppCompatActivity {
         String phone = userLogin.getText().toString().trim();
         String pass = userLogin.getText().toString().trim();
     }
-    private Boolean validatePhone(){
+    private Boolean validateUsername() {
         String val = userLogin.getText().toString();
-        String noWhiteSpace = "\\A\\w[4,20]\\z";
-        if (val.isEmpty()){
-            userLogin.setError("Not null");
+        if (val.isEmpty()) {
+            userLogin.setError("Field cannot be empty");
             return false;
-        }
-        else {
+        } else {
             userLogin.setError(null);
             return true;
         }
     }
-    private Boolean validatePass(){
+    private Boolean validatePassword() {
         String val = passLogin.getText().toString();
-        String passval = "^"+
-                "(?=.*[a-zA-Z])"+
-                "(?=.*[@#$%^&+=])"+
-                "(?=\\S+$)"+
-                ".{4,}"+
-                "$";
-        if (val.isEmpty()){
-            passLogin.setError("Password cannot Empty");
+        if (val.isEmpty()) {
+            passLogin.setError("Field cannot be empty");
             return false;
-        } /*else if(!val.matches(passval)){
-            passLogin.setError("Password is too weak");
-            return false;
-        }*/else{
+        } else {
             passLogin.setError(null);
             return true;
         }
     }
 
-    public void loginUser(View view){
-        if(!validatePhone() | !validatePass()){
+    public void loginUser(View view) {
+        //Validate Login Info
+        if (!validateUsername() | !validatePassword()) {
             return;
+        } else {
+            isUser();
 
-        }
-        else
-        {
-            isuser();
         }
     }
+    private void isUser() {
+        //progressBar.setVisibility(View.VISIBLE);
 
-    private void isuser() {
-        String UsernameEntered = userLogin.getText().toString().trim();
-        String PasswordEntered = passLogin.getText().toString().trim();
-
+        final String userEnteredUsername = userLogin.getText().toString().trim();
+        final String userEnteredPassword = passLogin.getText().toString().trim();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
-        Query userQuery = reference.orderByChild("phone").equalTo(UsernameEntered);
-        userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query checkUser = reference.orderByChild("phone").equalTo(userEnteredUsername);
+
+        checkUser.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                userLogin.setVisibility(View.GONE);
-                if(snapshot.exists()){
-                    userLogin.setVisibility(View.GONE);
-                    String passDB = snapshot.child(UsernameEntered).child("pass").getValue(String.class);
-                    if(passDB.equals(PasswordEntered)){
-
-                        //String emailDB = snapshot.child(UsernameEntered).child("email").getValue(String.class);
-
-                        Intent intent = new Intent(getApplicationContext(),Profile.class);
-
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Toast.makeText(Login.this,"asdasdkasldkaj",Toast.LENGTH_LONG).show();
+                if (dataSnapshot.exists()) {
+                    userLogin.setError(null);
+                    String passwordFromDB = dataSnapshot.child(userEnteredUsername).child("pass").getValue(String.class);
+                    if (passwordFromDB.equals(userEnteredPassword)) {
+                        userLogin.setError(null);
+                        userLogin.setEnabled(false);
+                        String firstnameFromDB = dataSnapshot.child(userEnteredUsername).child("first").getValue(String.class);
+                        String lastnameFromDB = dataSnapshot.child(userEnteredUsername).child("last").getValue(String.class);
+                        String phoneNoFromDB = dataSnapshot.child(userEnteredUsername).child("phone").getValue(String.class);
+                        String emailFromDB = dataSnapshot.child(userEnteredUsername).child("email").getValue(String.class);
+                        Intent intent = new Intent(getApplicationContext(), Profile.class);
+                        intent.putExtra("name", firstnameFromDB);
+                        intent.putExtra("username", lastnameFromDB);
+                        intent.putExtra("email", emailFromDB);
+                        intent.putExtra("phone", phoneNoFromDB);
+                        intent.putExtra("password", passwordFromDB);
                         startActivity(intent);
-                    }
-                    else {
-                        passLogin.setError("Wronggg Password");
+                    } else {
+                        //progressBar.setVisibility(View.GONE);
+                        passLogin.setError("Wrong Password");
                         passLogin.requestFocus();
                     }
-                }
-                else {
-                    userLogin.setError("User not exist");
+                } else {
+                    //progressBar.setVisibility(View.GONE);
+                    userLogin.setError("No such User exist");
                     userLogin.requestFocus();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
-                Toast.makeText(Login.this,"Faild",Toast.LENGTH_LONG).show();
+
             }
         });
     }

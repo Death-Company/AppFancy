@@ -127,7 +127,6 @@ public class VerifyPhone extends AppCompatActivity {
                     .setTimeout(60L, TimeUnit.SECONDS)
                     .setCallbacks(callbacks)
                     .build();
-
             PhoneAuthProvider.verifyPhoneNumber(options);
     }
     public void authenticateUser(PhoneAuthCredential credential){
@@ -141,7 +140,7 @@ public class VerifyPhone extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
                     User usercreate = new User(first,last,email,pass,phone);
                     FirebaseDatabase.getInstance().getReference("User")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .child(phone)
                             .setValue(usercreate).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<Void> task) {
@@ -154,7 +153,6 @@ public class VerifyPhone extends AppCompatActivity {
                     });
                     Toast.makeText(VerifyPhone.this,"Success",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
-
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
